@@ -1,0 +1,8 @@
+*.o
+*.map
+stage[123]
+kernel.bz2
+config
+build
+*.bin
+[^c]*.img
