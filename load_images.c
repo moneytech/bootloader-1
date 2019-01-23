@@ -103,7 +103,9 @@ int read_image(int image_size, void* dst, lba32 slba) {
     return 0;
 }
 
-int load_images(union disk_record* mbr, int stage3_size, int kernel_size) {
+int load_images(union disk_record* mbr, int stage3_size, \
+                int kernel_size, int initrd_size) 
+{
     int ret;
     lba32 slba; 
     
@@ -123,6 +125,14 @@ kernel:
     slba += stage3_size;
     ret = read_image(kernel_size, (void*) IMAGE_START, slba);
     if (ret) return -1;
+
+initrd:
+    if (initrd_size < 1) goto end;
+    prints("  Loading initrd ");
+    slba += kernel_size;
+    ret = read_image(initrd_size, (void*) INITRD_START, slba);
+    if (ret) return -1;
+    
 end:
     return ret;
 }
