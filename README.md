@@ -7,4 +7,4 @@
 
 下記は、自作initrdをくっつけた Linux を起動するの図
 
-![boot](./boot.mp4)
+![boot](./boot.gif)
